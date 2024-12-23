@@ -9,8 +9,10 @@ services:
     name: onegrab
     runtime: ruby
     plan: free
-    buildCommand: "./bin/render-build.sh"
+    #buildCommand: "./bin/render-build.sh"
     # preDeployCommand: "bundle exec rails db:migrate" # preDeployCommand only available on paid instance types
+    pre_build_command: "sudo apt-get update && sudo apt-get install -y libpq-dev"
+    build_command: bundle install && bundle exec rake assets:precompile && bundle exec rake db:migrate
     startCommand: "bundle exec rails server"
     envVars:
       - key: DATABASE_URL
