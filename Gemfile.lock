@@ -425,6 +425,7 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   jsonapi-serializer
+  jwt
   kamal
   pg (~> 1.1)
   propshaft
