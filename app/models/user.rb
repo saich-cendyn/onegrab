@@ -16,8 +16,11 @@ class User < ApplicationRecord
     conditions = warden_conditions.dup
     login = conditions.delete(:login)&.downcase
 
-    where(conditions).where(
-        ["lower(username) = :value OR lower(email) = :value", { value: login }]
-    ).first
+    if login.present?
+      where(conditions).where("lower(username) = :value OR lower(email) = :value", { value: login }).first
+    else
+      email = conditions[:email]&.downcase
+      where(conditions).where("lower(email) = ?", email).first
+    end
   end
 end

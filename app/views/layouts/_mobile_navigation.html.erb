@@ -1,0 +1,20 @@
+<ul class="space-y-3 font-medium text-gray-700">
+  <li><%= link_to "Home", root_path, class: "block hover:text-indigo-600 transition" %></li>
+  <li><%= link_to "Blog", '#', class: "block hover:text-indigo-600 transition" %></li>
+  <li><%= link_to "About Us", '#', class: "block hover:text-indigo-600 transition" %></li>
+  <li><%= link_to "Courses", '/courses', class: "block hover:text-indigo-600 transition" %></li>
+  <li><%= link_to "Contact Us", '#', class: "block hover:text-indigo-600 transition" %></li>
+  <% if member_signed_in? %>
+    <li class="pt-2 border-t border-gray-200">
+      <span class="block text-gray-700 mb-2">Hello, <%= current_member.email %></span>
+      <%= button_to "Logout", destroy_member_session_path, method: :delete, class: "w-full bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
+    </li>
+  <% else %>
+    <li>
+      <%= link_to "Login", new_member_session_path, class: "block text-indigo-600 hover:text-indigo-800 font-semibold" %>
+    </li>
+    <li>
+      <%= link_to "Sign Up", new_member_registration_path, class: "block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center font-semibold" %>
+    </li>
+  <% end %>
+</ul>

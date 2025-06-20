@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_19_122732) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_20_135908) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -24,13 +24,26 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_19_122732) do
   enable_extension "extensions.pg_stat_statements"
   enable_extension "extensions.pgcrypto"
   enable_extension "extensions.uuid-ossp"
-  enable_extension "graphql.pg_graphql"
   enable_extension "pg_catalog.plpgsql"
-  enable_extension "vault.supabase_vault"
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "courses", force: :cascade do |t|
+    t.string "title"
+    t.text "description"
+    t.string "short_description"
+    t.decimal "price"
+    t.boolean "published"
+    t.datetime "published_at"
+    t.integer "category_id"
+    t.string "level"
+    t.string "thumbnail_url"
+    t.integer "duration_minutes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end

@@ -1,0 +1,27 @@
+<header class="bg-white shadow sticky top-0 z-50">
+  <nav class="container mx-auto flex items-center justify-between py-4 px-6">
+    <!-- Logo -->
+    <a href="/" class="text-3xl font-extrabold text-indigo-600 hover:text-indigo-800">
+      Onegrab
+    </a>
+
+    <!-- Navigation Links -->
+    <%= render "layouts/navigation" %>
+
+    <!-- Auth Buttons -->
+    <%= render "layouts/auth_buttons" %>
+
+    <!-- Mobile menu button -->
+    <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
+      <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
+              d="M4 6h16M4 12h16M4 18h16"/>
+      </svg>
+    </button>
+  </nav>
+
+  <!-- Mobile menu (hidden by default) -->
+  <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
+    <%= render "layouts/mobile_navigation" %>
+  </div>
+</header>

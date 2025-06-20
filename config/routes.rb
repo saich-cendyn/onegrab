@@ -1,12 +1,12 @@
 Rails.application.routes.draw do
-
   namespace :api do
     namespace :v1 do
       devise_for :users,
                  skip: [:new, :edit],
                  controllers: {
                      sessions: 'api/v1/users/sessions',
-                     registrations: 'api/v1/users/registrations'
+                     registrations: 'api/v1/users/registrations',
+                     confirmations: 'api/v1/users/confirmations'
                  },
                  path_names: {
                      sign_in: 'login',
@@ -17,8 +17,9 @@ Rails.application.routes.draw do
     end
   end
 
-
-  devise_for :users
+  devise_for :members
   resources :articles
+  resources :courses
+
   root "home#index"
 end

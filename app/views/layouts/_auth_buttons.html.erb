@@ -1,0 +1,9 @@
+<div class="hidden md:flex space-x-4 items-center">
+  <% if member_signed_in? %>
+    <span class="text-gray-700 font-medium">Hello, <%= current_member.email %></span>
+    <%= button_to "Logout", destroy_member_session_path, method: :delete, class: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
+  <% else %>
+    <%= link_to "Login", new_member_session_path, class: "text-indigo-600 hover:text-indigo-800 font-semibold" %>
+    <%= link_to "Sign Up", new_member_registration_path, class: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
+  <% end %>
+</div>

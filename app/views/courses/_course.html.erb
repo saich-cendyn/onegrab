@@ -1,0 +1,42 @@
+<div id="<%= dom_id course %>" class="w-full sm:w-auto my-5 space-y-5">
+  <div>
+    <strong class="block font-medium mb-1">Title:</strong>
+    <%= course.title %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Description:</strong>
+    <%= course.description %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Short description:</strong>
+    <%= course.short_description %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Price:</strong>
+    <%= course.price %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Published:</strong>
+    <%= course.published? ? "Yes" : "No" %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Published at:</strong>
+    <%= course.published_at %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Category:</strong>
+    <%= course.category_id %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Level:</strong>
+    <%= course.level %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Thumbnail url:</strong>
+    <%= course.thumbnail_url %>
+  </div>
+  <div>
+    <strong class="block font-medium mb-1">Duration minutes:</strong>
+    <%= course.duration_minutes %>
+  </div>
+</div>

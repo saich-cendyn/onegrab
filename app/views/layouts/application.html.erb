@@ -11,66 +11,7 @@
   </head>
 
   <body class="bg-white min-h-screen flex flex-col">
-    <header class="bg-white shadow sticky top-0 z-50">
-      <nav class="container mx-auto flex items-center justify-between py-4 px-6">
-        <!-- Logo -->
-        <a href="/" class="text-3xl font-extrabold text-indigo-600 hover:text-indigo-800">
-          Onegrab
-        </a>
-
-        <!-- Navigation Links -->
-        <ul class="hidden md:flex space-x-8 font-medium text-gray-700">
-          <li><%= link_to "Home", '#', class: "hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "Blog", '#', class: "hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "About Us", '#', class: "hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "Courses", '#', class: "hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "Contact Us", '#', class: "hover:text-indigo-600 transition" %></li>
-        </ul>
-
-        <!-- Auth Buttons -->
-        <div class="hidden md:flex space-x-4 items-center">
-          <% if user_signed_in? %>
-            <span class="text-gray-700 font-medium">Hello, <%= current_user.email %></span>
-            <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
-          <% else %>
-            <%= link_to "Login", new_user_session_path, class: "text-indigo-600 hover:text-indigo-800 font-semibold" %>
-            <%= link_to "Sign Up", new_user_registration_path, class: "bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
-          <% end %>
-        </div>
-
-        <!-- Mobile menu button -->
-        <button id="mobile-menu-button" class="md:hidden text-gray-700 focus:outline-none">
-          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2"
-                  d="M4 6h16M4 12h16M4 18h16"/>
-          </svg>
-        </button>
-      </nav>
-
-      <!-- Mobile menu (hidden by default) -->
-      <div id="mobile-menu" class="hidden md:hidden px-6 pb-4">
-        <ul class="space-y-3 font-medium text-gray-700">
-          <li><%= link_to "Home", root_path, class: "block hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "Blog", '#', class: "block hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "About Us", '#', class: "block hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "Courses", '#', class: "block hover:text-indigo-600 transition" %></li>
-          <li><%= link_to "Contact Us", '#', class: "block hover:text-indigo-600 transition" %></li>
-          <% if user_signed_in? %>
-            <li class="pt-2 border-t border-gray-200">
-              <span class="block text-gray-700 mb-2">Hello, <%= current_user.email %></span>
-              <%= button_to "Logout", destroy_user_session_path, method: :delete, class: "w-full bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition" %>
-            </li>
-          <% else %>
-            <li>
-              <%= link_to "Login", new_user_session_path, class: "block text-indigo-600 hover:text-indigo-800 font-semibold" %>
-            </li>
-            <li>
-              <%= link_to "Sign Up", new_user_registration_path, class: "block bg-indigo-600 text-white px-4 py-2 rounded hover:bg-indigo-700 transition text-center font-semibold" %>
-            </li>
-          <% end %>
-        </ul>
-      </div>
-    </header>
+    <%= render "layouts/header" %>
 
     <main class="container mx-auto flex-grow px-6 py-10">
       <% if notice %>
@@ -87,9 +28,7 @@
       <%= yield %>
     </main>
 
-    <footer class="bg-gray-100 text-center py-6 text-gray-600 text-sm">
-      &copy; <%= Time.current.year %> Onegrab. All rights reserved.
-    </footer>
+    <%= render "layouts/footer" %>
 
     <script>
       const btn = document.getElementById('mobile-menu-button');
