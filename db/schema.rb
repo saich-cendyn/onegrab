@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_20_135908) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_043148) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -24,11 +24,19 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_20_135908) do
   enable_extension "extensions.pg_stat_statements"
   enable_extension "extensions.pgcrypto"
   enable_extension "extensions.uuid-ossp"
+  enable_extension "graphql.pg_graphql"
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "vault.supabase_vault"
 
   create_table "articles", force: :cascade do |t|
     t.string "title"
     t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "categories", force: :cascade do |t|
+    t.string "name"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
@@ -46,6 +54,8 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_20_135908) do
     t.integer "duration_minutes"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.bigint "author_id", null: false
+    t.index ["author_id"], name: "index_courses_on_author_id"
   end
 
   create_table "jwt_denylists", force: :cascade do |t|
@@ -76,7 +86,10 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_20_135908) do
     t.datetime "updated_at", null: false
     t.string "username"
     t.string "phone"
+    t.integer "role", default: 0
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
+
+  add_foreign_key "courses", "users", column: "author_id"
 end
