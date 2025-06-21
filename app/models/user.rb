@@ -1,6 +1,5 @@
 class User < ApplicationRecord
 
-
   # Include default devise modules as needed
   devise :database_authenticatable, :registerable,
          :recoverable, :rememberable, :validatable,
@@ -16,6 +15,7 @@ class User < ApplicationRecord
   enum :role, {  member: 0, author: 1, teacher: 2, admin: 4 }
 
   has_many :authored_courses, class_name: 'Course', foreign_key: 'author_id'
+  has_many :posts, foreign_key: :author_id
 
 
   # Override Devise method to allow login via username or email

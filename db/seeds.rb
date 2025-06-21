@@ -84,6 +84,27 @@ students_data = [
     }
 ]
 
-students_data.each do |student_attrs|
-  Student.create!(student_attrs)
-end
+# students_data.each do |student_attrs|
+#   Student.create!(student_attrs)
+# end
+
+Post.create!(
+    [
+        {
+            title: "Getting Started with Ruby on Rails",
+            content: "Ruby on Rails is a powerful web development framework...",
+            excerpt: "An introductory guide to Ruby on Rails.",
+            published_at: 2.days.ago,
+            status: "published",
+            author: author
+        },
+        {
+            title: "Understanding ActiveRecord Associations",
+            content: "ActiveRecord associations simplify working with related models...",
+            excerpt: "Learn about the basics of ActiveRecord associations.",
+            published_at: 1.day.ago,
+            status: "published",
+            author: author
+        }
+    ]
+)

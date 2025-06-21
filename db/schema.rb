@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_054835) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_063613) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -33,6 +33,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_054835) do
     t.text "body"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.text "excerpt"
+    t.datetime "published_at"
+    t.string "status"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_blogs_on_author_id"
   end
 
   create_table "categories", force: :cascade do |t|
@@ -73,6 +85,18 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_054835) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylists_on_jti"
+  end
+
+  create_table "posts", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.string "excerpt"
+    t.datetime "published_at"
+    t.string "status"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_posts_on_author_id"
   end
 
   create_table "students", force: :cascade do |t|
@@ -116,7 +140,9 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_054835) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blogs", "users", column: "author_id"
   add_foreign_key "course_enrollments", "courses"
   add_foreign_key "course_enrollments", "students"
   add_foreign_key "courses", "users", column: "author_id"
+  add_foreign_key "posts", "users", column: "author_id"
 end

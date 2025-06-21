@@ -1,0 +1,46 @@
+<%= form_with(model: post, class: "space-y-6") do |form| %>
+  <% if post.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-700 px-4 py-3 rounded-md border border-red-300">
+      <h2 class="font-semibold mb-2"><%= pluralize(post.errors.count, "error") %> prohibited this post from being saved:</h2>
+      <ul class="list-disc list-inside space-y-1">
+        <% post.errors.full_messages.each do |message| %>
+          <li><%= message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :title, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :title, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 #{'border-red-500' if post.errors[:title].any?}" %>
+  </div>
+
+  <div>
+    <%= form.label :content, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_area :content, rows: 6, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 #{'border-red-500' if post.errors[:content].any?}" %>
+  </div>
+
+  <div>
+    <%= form.label :excerpt, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.text_field :excerpt, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 #{'border-red-500' if post.errors[:excerpt].any?}" %>
+  </div>
+
+  <div>
+    <%= form.label :published_at, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.datetime_field :published_at, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 #{'border-red-500' if post.errors[:published_at].any?}" %>
+  </div>
+
+  <div>
+    <%= form.label :status, class: "block text-sm font-medium text-gray-700" %>
+    <%= form.select :status, Post.statuses.keys.map { |k| [k.titleize, k] }, { include_blank: "Select status" }, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 #{'border-red-500' if post.errors[:status].any?}" %>
+  </div>
+
+  <div>
+    <%= form.label :author_id, "Author", class: "block text-sm font-medium text-gray-700" %>
+    <%= form.collection_select :author_id, User.all, :id, :username, { include_blank: "Select Author" }, class: "mt-1 block w-full rounded-md border border-gray-300 shadow-sm px-3 py-2 focus:border-blue-500 focus:ring focus:ring-blue-200 #{'border-red-500' if post.errors[:author_id].any?}" %>
+  </div>
+
+  <div>
+    <%= form.submit "Save Post", class: "w-full sm:w-auto rounded-md bg-blue-600 hover:bg-blue-700 text-white font-semibold px-4 py-2 transition cursor-pointer" %>
+  </div>
+<% end %>

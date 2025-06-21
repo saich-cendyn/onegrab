@@ -1,5 +1,4 @@
 Rails.application.routes.draw do
-  resources :students
   namespace :api do
     namespace :v1 do
       devise_for :users,
@@ -15,12 +14,17 @@ Rails.application.routes.draw do
                      sign_up: 'signup'
                  },
                  defaults: { format: :json }
+
+      resources :courses, only: [:index]
+      resources :students, only: [:index]
+      resources :posts, only: [:index]
     end
   end
 
   devise_for :members
-  resources :articles
   resources :courses
+  resources :students
+  resources :posts
 
   root "home#index"
 end
