@@ -42,12 +42,48 @@ courses = [
     }
 ]
 
-courses.each do |course_attrs|
-  Course.find_or_create_by(title: course_attrs[:title]) do |course|
-    course.description = course_attrs[:description]
-    course.category = course_attrs[:category]
-    course.author = author
-  end
-end
+# courses.each do |course_attrs|
+#   Course.find_or_create_by(title: course_attrs[:title]) do |course|
+#     course.description = course_attrs[:description]
+#     course.category = course_attrs[:category]
+#     course.author = author
+#   end
+# end
+#
+# puts "Seeded #{courses.size} courses."
 
-puts "Seeded #{courses.size} courses."
+
+# db/seeds.rb
+
+students_data = [
+    {
+        name: "Alice Johnson",
+        email: "alice.johnson@example.com",
+        phone: "9876543210",
+        address: "123 Maple St, Springfield",
+        gender: "female",
+        dob: Date.new(2005, 5, 14),
+        enrollment_date: Date.new(2023, 1, 10),
+        status: "active",
+        parent_guardian_name: "Mary Johnson",
+        emergency_contact: "9876543211",
+        progress_status: "in_progress"
+    },
+    {
+        name: "Bob Smith",
+        email: "bob.smith@example.com",
+        phone: "9123456789",
+        address: "456 Oak Ave, Rivertown",
+        gender: "male",
+        dob: Date.new(2004, 8, 22),
+        enrollment_date: Date.new(2022, 9, 1),
+        status: "active",
+        parent_guardian_name: "John Smith",
+        emergency_contact: "9123456790",
+        progress_status: "not_started"
+    }
+]
+
+students_data.each do |student_attrs|
+  Student.create!(student_attrs)
+end

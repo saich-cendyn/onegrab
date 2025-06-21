@@ -1,0 +1,25 @@
+<h1 class="text-3xl font-bold mb-8">Students</h1>
+
+<div class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-8">
+  <% @students.each do |student| %>
+    <div class="bg-white shadow-lg rounded-lg p-6 flex flex-col items-center">
+      <div class="w-32 h-32 rounded-full overflow-hidden mb-5 flex-shrink-0">
+        <img src="<%= student.image_url %>" alt="<%= student.name %>" class="object-cover w-full h-full" />
+      </div>
+      <h2 class="text-xl font-semibold mb-2 text-center truncate w-full"><%= student.name %></h2>
+      <p class="text-sm text-gray-700 mb-1 truncate w-full text-center"><%= student.email %></p>
+      <p class="text-sm text-gray-700 mb-3"><%= student.phone %></p>
+      <p class="text-xs text-gray-500 mb-6 max-w-xs text-center truncate">
+        <%= student.address.presence || 'No address provided' %>
+      </p>
+      <div class="flex space-x-6">
+        <%= link_to 'View', student_path(student), class: "text-indigo-600 hover:text-indigo-900 font-semibold" %>
+        <%= link_to 'Edit', edit_student_path(student), class: "text-green-600 hover:text-green-900 font-semibold" %>
+      </div>
+    </div>
+  <% end %>
+</div>
+
+<div class="mt-8">
+  <%= link_to 'Add New Student', new_student_path, class: "inline-block bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition" %>
+</div>

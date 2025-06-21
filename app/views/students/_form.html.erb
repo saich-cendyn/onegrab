@@ -1,0 +1,71 @@
+<%= form_with(model: student, class: "contents") do |form| %>
+  <% if student.errors.any? %>
+    <div id="error_explanation" class="bg-red-50 text-red-600 px-4 py-3 rounded-md mt-3">
+      <h2 class="font-semibold mb-2"><%= pluralize(student.errors.count, "error") %> prohibited this student from being saved:</h2>
+      <ul class="list-disc ml-6 space-y-1">
+        <% student.errors.full_messages.each do |msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="my-5">
+    <%= form.label :name, class: "block font-medium" %>
+    <%= form.text_field :name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:name].none?, "border-red-500 focus:outline-red-600": student.errors[:name].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :email, class: "block font-medium" %>
+    <%= form.email_field :email, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:email].none?, "border-red-500 focus:outline-red-600": student.errors[:email].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :phone, class: "block font-medium" %>
+    <%= form.telephone_field :phone, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:phone].none?, "border-red-500 focus:outline-red-600": student.errors[:phone].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :address, class: "block font-medium" %>
+    <%= form.text_area :address, rows: 4, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full resize-none", { "border-gray-400 focus:outline-blue-600": student.errors[:address].none?, "border-red-500 focus:outline-red-600": student.errors[:address].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :gender, class: "block font-medium" %>
+    <%= form.select :gender, Student::GENDERS.map { |g| [g.titleize, g] }, { prompt: "Select Gender" }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:gender].none?, "border-red-500 focus:outline-red-600": student.errors[:gender].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :dob, "Date of Birth", class: "block font-medium" %>
+    <%= form.date_field :dob, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:dob].none?, "border-red-500 focus:outline-red-600": student.errors[:dob].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :enrollment_date, class: "block font-medium" %>
+    <%= form.date_field :enrollment_date, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:enrollment_date].none?, "border-red-500 focus:outline-red-600": student.errors[:enrollment_date].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :status, class: "block font-medium" %>
+    <%= form.select :status, Student.statuses.keys.map { |status| [status.titleize, status] }, { prompt: "Select Status" }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:status].none?, "border-red-500 focus:outline-red-600": student.errors[:status].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :parent_guardian_name, class: "block font-medium" %>
+    <%= form.text_field :parent_guardian_name, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:parent_guardian_name].none?, "border-red-500 focus:outline-red-600": student.errors[:parent_guardian_name].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :emergency_contact, class: "block font-medium" %>
+    <%= form.text_field :emergency_contact, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:emergency_contact].none?, "border-red-500 focus:outline-red-600": student.errors[:emergency_contact].any? }] %>
+  </div>
+
+  <div class="my-5">
+    <%= form.label :progress_status, class: "block font-medium" %>
+    <%= form.select :progress_status, Student.progress_statuses.keys.map { |status| [status.titleize, status] }, { prompt: "Select Progress Status" }, class: ["block shadow-sm rounded-md border px-3 py-2 mt-2 w-full", { "border-gray-400 focus:outline-blue-600": student.errors[:progress_status].none?, "border-red-500 focus:outline-red-600": student.errors[:progress_status].any? }] %>
+  </div>
+
+  <div class="inline mt-6">
+    <%= form.submit class: "w-full sm:w-auto rounded-md px-5 py-2.5 bg-blue-600 hover:bg-blue-700 text-white font-semibold cursor-pointer" %>
+  </div>
+<% end %>

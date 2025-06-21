@@ -10,4 +10,6 @@ class Course < ApplicationRecord
 
   belongs_to :category
   belongs_to :author, class_name: 'User'
+  has_many :course_enrollments
+  has_many :students, through: :course_enrollments
 end

@@ -1,0 +1,28 @@
+<div class="max-w-3xl mx-auto bg-white p-6 rounded shadow">
+  <h2 class="text-2xl font-semibold mb-6">Student Details</h2>
+
+  <div class="flex space-x-8">
+    <div class="w-32 h-32 rounded overflow-hidden bg-gray-100 flex items-center justify-center">
+      <img src="<%= @student.image_url %>" alt="<%= @student.name %>" class="object-cover w-full h-full" />
+    </div>
+
+    <div class="flex-1 space-y-3">
+      <p><strong>Name:</strong> <%= @student.name %></p>
+      <p><strong>Email:</strong> <%= @student.email %></p>
+      <p><strong>Phone:</strong> <%= @student.phone %></p>
+      <p><strong>Address:</strong> <%= @student.address.presence || 'N/A' %></p>
+      <p><strong>Gender:</strong> <%= @student.gender.capitalize %></p>
+      <p><strong>Date of Birth:</strong> <%= @student.dob.strftime("%B %d, %Y") %></p>
+      <p><strong>Enrollment Date:</strong> <%= @student.enrollment_date.present? ? @student.enrollment_date.strftime("%B %d, %Y") : 'N/A' %></p>
+      <p><strong>Status:</strong> <%= @student.status&.humanize || 'N/A' %></p>
+      <p><strong>Parent / Guardian Name:</strong> <%= @student.parent_guardian_name.presence || 'N/A' %></p>
+      <p><strong>Emergency Contact:</strong> <%= @student.emergency_contact.presence || 'N/A' %></p>
+      <p><strong>Progress Status:</strong> <%= @student.progress_status&.humanize || 'N/A' %></p>
+    </div>
+  </div>
+
+  <div class="mt-6 flex space-x-4">
+    <%= link_to 'Edit Student', edit_student_path(@student), class: "bg-green-600 text-white px-4 py-2 rounded hover:bg-green-700 transition" %>
+    <%= link_to 'Back to List', students_path, class: "text-gray-600 hover:text-gray-900 self-center" %>
+  </div>
+</div>

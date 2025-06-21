@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_043148) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_054835) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -41,6 +41,15 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_043148) do
     t.datetime "updated_at", null: false
   end
 
+  create_table "course_enrollments", force: :cascade do |t|
+    t.bigint "student_id", null: false
+    t.bigint "course_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["course_id"], name: "index_course_enrollments_on_course_id"
+    t.index ["student_id"], name: "index_course_enrollments_on_student_id"
+  end
+
   create_table "courses", force: :cascade do |t|
     t.string "title"
     t.text "description"
@@ -64,6 +73,22 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_043148) do
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["jti"], name: "index_jwt_denylists_on_jti"
+  end
+
+  create_table "students", force: :cascade do |t|
+    t.string "name"
+    t.string "email"
+    t.string "phone"
+    t.text "address"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.string "gender", null: false
+    t.date "dob", null: false
+    t.date "enrollment_date"
+    t.string "status"
+    t.string "parent_guardian_name"
+    t.string "emergency_contact"
+    t.string "progress_status"
   end
 
   create_table "users", force: :cascade do |t|
@@ -91,5 +116,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_043148) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "course_enrollments", "courses"
+  add_foreign_key "course_enrollments", "students"
   add_foreign_key "courses", "users", column: "author_id"
 end
