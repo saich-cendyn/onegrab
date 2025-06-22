@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_063613) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_21_161235) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -24,28 +24,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_063613) do
   enable_extension "extensions.pg_stat_statements"
   enable_extension "extensions.pgcrypto"
   enable_extension "extensions.uuid-ossp"
-  enable_extension "graphql.pg_graphql"
   enable_extension "pg_catalog.plpgsql"
-  enable_extension "vault.supabase_vault"
-
-  create_table "articles", force: :cascade do |t|
-    t.string "title"
-    t.text "body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "blogs", force: :cascade do |t|
-    t.string "title"
-    t.text "content"
-    t.text "excerpt"
-    t.datetime "published_at"
-    t.string "status"
-    t.bigint "author_id", null: false
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["author_id"], name: "index_blogs_on_author_id"
-  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -136,11 +115,12 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_063613) do
     t.string "username"
     t.string "phone"
     t.integer "role", default: 0
+    t.string "first_name"
+    t.string "last_name"
     t.index ["email"], name: "index_users_on_email", unique: true
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
-  add_foreign_key "blogs", "users", column: "author_id"
   add_foreign_key "course_enrollments", "courses"
   add_foreign_key "course_enrollments", "students"
   add_foreign_key "courses", "users", column: "author_id"

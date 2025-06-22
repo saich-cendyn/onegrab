@@ -29,3 +29,5 @@
 
 en:
   hello: "Hello world"
+  currency: "₹"
+  course_price: "₹%{price}"
