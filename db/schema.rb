@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_21_161235) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_23_041034) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -24,7 +24,28 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_161235) do
   enable_extension "extensions.pg_stat_statements"
   enable_extension "extensions.pgcrypto"
   enable_extension "extensions.uuid-ossp"
+  enable_extension "graphql.pg_graphql"
   enable_extension "pg_catalog.plpgsql"
+  enable_extension "vault.supabase_vault"
+
+  create_table "articles", force: :cascade do |t|
+    t.string "title"
+    t.text "body"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "blogs", force: :cascade do |t|
+    t.string "title"
+    t.text "content"
+    t.text "excerpt"
+    t.datetime "published_at"
+    t.string "status"
+    t.bigint "author_id", null: false
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["author_id"], name: "index_blogs_on_author_id"
+  end
 
   create_table "categories", force: :cascade do |t|
     t.string "name"
@@ -56,6 +77,16 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_161235) do
     t.datetime "updated_at", null: false
     t.bigint "author_id", null: false
     t.index ["author_id"], name: "index_courses_on_author_id"
+  end
+
+  create_table "enquiries", force: :cascade do |t|
+    t.string "name", null: false
+    t.string "email", null: false
+    t.string "phone", null: false
+    t.string "subject"
+    t.text "message"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "jwt_denylists", force: :cascade do |t|
@@ -121,6 +152,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_21_161235) do
     t.index ["reset_password_token"], name: "index_users_on_reset_password_token", unique: true
   end
 
+  add_foreign_key "blogs", "users", column: "author_id"
   add_foreign_key "course_enrollments", "courses"
   add_foreign_key "course_enrollments", "students"
   add_foreign_key "courses", "users", column: "author_id"

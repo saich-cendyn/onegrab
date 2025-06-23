@@ -15,9 +15,9 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
 
       render json: {
           message: 'Signed in successfully.',
-          token: token,
-          user: user.as_json(only: [:id, :username, :email, :phone])
-      }, status: :ok
+          user: UserSerializer.new(user).serializable_hash[:data][:attributes],
+          token: token
+      }, status: :created
     else
       render json: { errors: ['Invalid login or password'] }, status: :unauthorized
     end

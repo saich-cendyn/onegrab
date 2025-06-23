@@ -1,0 +1,26 @@
+<h1 class="text-4xl font-bold mb-8 text-center text-gray-900">Enquiries</h1>
+
+<div class="overflow-x-auto max-w-7xl mx-auto px-4">
+  <table class="min-w-full bg-white rounded-lg shadow-md overflow-hidden">
+    <thead class="bg-blue-600 text-white">
+    <tr>
+      <th class="py-3 px-6 text-left font-semibold">Name</th>
+      <th class="py-3 px-6 text-left font-semibold">Email</th>
+      <th class="py-3 px-6 text-left font-semibold">Phone</th>
+      <th class="py-3 px-6 text-center font-semibold">Actions</th>
+    </tr>
+    </thead>
+    <tbody class="divide-y divide-gray-200">
+    <% @enquiries.each do |enquiry| %>
+      <tr class="hover:bg-gray-50 transition-colors duration-200 cursor-pointer">
+        <td class="py-4 px-6 whitespace-nowrap text-gray-800"><%= enquiry.name %></td>
+        <td class="py-4 px-6 whitespace-nowrap text-gray-700"><%= enquiry.email %></td>
+        <td class="py-4 px-6 whitespace-nowrap text-gray-700"><%= enquiry.phone %></td>
+        <td class="py-4 px-6 whitespace-nowrap text-center">
+          <%= link_to 'View', enquiry_path(enquiry), class: 'text-blue-600 hover:text-blue-800 font-semibold' %>
+        </td>
+      </tr>
+    <% end %>
+    </tbody>
+  </table>
+</div>

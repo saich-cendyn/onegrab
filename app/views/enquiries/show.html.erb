@@ -1,0 +1,34 @@
+<div id="<%= dom_id @enquiry %>" class="max-w-xl mx-auto bg-white rounded-lg shadow-lg p-8 space-y-6 border border-gray-300">
+  <h2 class="text-3xl font-extrabold text-gray-900 border-b border-gray-300 pb-4 mb-6">Enquiry Details</h2>
+
+  <%# Each field group %>
+  <%# Use flex for label and value side by side on md+ screens, stacked on small %>
+  <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+    <span class="md:w-32 font-semibold text-gray-600">Name:</span>
+    <span class="text-gray-800 break-words"><%= @enquiry.name %></span>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+    <span class="md:w-32 font-semibold text-gray-600">Email:</span>
+    <span class="text-gray-800 break-words"><%= @enquiry.email %></span>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+    <span class="md:w-32 font-semibold text-gray-600">Phone:</span>
+    <span class="text-gray-800 break-words"><%= @enquiry.phone.presence || "N/A" %></span>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:items-center md:space-x-6">
+    <span class="md:w-32 font-semibold text-gray-600">Subject:</span>
+    <span class="text-gray-800 break-words"><%= @enquiry.subject.presence || "N/A" %></span>
+  </div>
+
+  <div class="flex flex-col md:flex-row md:items-start md:space-x-6">
+    <span class="md:w-32 font-semibold text-gray-600">Message:</span>
+    <p class="text-gray-800 whitespace-pre-wrap leading-relaxed"><%= @enquiry.message %></p>
+  </div>
+
+  <div class="pt-6 border-t border-gray-300 text-right">
+    <%= link_to 'Back to Enquiries', enquiries_path, class: "inline-block px-6 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 transition" %>
+  </div>
+</div>

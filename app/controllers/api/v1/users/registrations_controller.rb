@@ -13,11 +13,8 @@ class Api::V1::Users::RegistrationsController < Devise::RegistrationsController
     if resource.save
       token = generate_jwt_token(resource)
       render json: {
-          status: {
-              code: 200,
-              message: 'Signed up successfully.'
-          },
-          data: UserSerializer.new(resource).serializable_hash[:data][:attributes],
+          message: 'Signed up successfully.',
+          user: UserSerializer.new(resource).serializable_hash[:data][:attributes],
           token: token
       }, status: :created
     else

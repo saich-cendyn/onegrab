@@ -18,6 +18,7 @@ Rails.application.routes.draw do
       resources :courses, only: [:index]
       resources :students, only: [:index]
       resources :posts, only: [:index]
+      resources :enquiries, only: [:create]
     end
   end
 
@@ -25,6 +26,7 @@ Rails.application.routes.draw do
   resources :courses
   resources :students
   resources :posts
+  resources :enquiries, only: [:index, :show]
 
   root "home#index"
 end
