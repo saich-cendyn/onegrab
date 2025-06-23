@@ -53,11 +53,11 @@ class Api::V1::Users::SessionsController < Devise::SessionsController
   end
 
   def jwt_secret
-    Rails.application.credentials.jwt.secret || ENV['JWT_SECRET_KEY']
+    ENV['JWT_SECRET_KEY'] || Rails.application.credentials.jwt.secret
   end
 
   def jwt_algorithm
-    Rails.application.credentials.jwt.algorithm || 'HS256'
+    'HS256'
   end
 
   def generate_jwt_token(user)
