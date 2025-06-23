@@ -73,14 +73,19 @@ Rails.application.configure do
 
   config.action_mailer.delivery_method = :letter_opener
   config.action_mailer.perform_deliveries = true
+
+  gmail_user_name = ENV['GMAIL_USER_NAME'] || Rails.application.credentials.dig(:gmail, :user_name)
+  gmail_password  = ENV['GMAIL_PASSWORD']  || Rails.application.credentials.dig(:gmail, :password)
+
   config.action_mailer.smtp_settings = {
-      address:              Rails.application.credentials.gmail[:address],
-      port:                 Rails.application.credentials.gmail[:port],
-      domain:               Rails.application.credentials.gmail[:domain],
-      user_name:            Rails.application.credentials.gmail[:user_name],
-      password:             Rails.application.credentials.gmail[:password],
-      authentication:       Rails.application.credentials.gmail[:auth],
-      enable_starttls_auto: Rails.application.credentials.gmail[:enable_tls]
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'onegrab.in',
+      authentication:       'plain',
+      enable_starttls_auto: true,
+      user_name:            gmail_user_name,
+      password:             gmail_password
   }
+
   config.action_mailer.default_url_options = { host: 'localhost', port: 4341 }
 end

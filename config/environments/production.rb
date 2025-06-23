@@ -57,18 +57,6 @@ Rails.application.configure do
   # Set this to true and configure the email server for immediate delivery to raise delivery errors.
   # config.action_mailer.raise_delivery_errors = false
 
-  # Set host to be used by links generated in mailer templates.
-  config.action_mailer.default_url_options = { host: "example.com" }
-
-  # Specify outgoing SMTP server. Remember to add smtp/* credentials via rails credentials:edit.
-  # config.action_mailer.smtp_settings = {
-  #   user_name: Rails.application.credentials.dig(:smtp, :user_name),
-  #   password: Rails.application.credentials.dig(:smtp, :password),
-  #   address: "smtp.example.com",
-  #   port: 587,
-  #   authentication: :plain
-  # }
-
   # Enable locale fallbacks for I18n (makes lookups for any locale fall back to
   # the I18n.default_locale when a translation cannot be found).
   config.i18n.fallbacks = true
@@ -89,14 +77,19 @@ Rails.application.configure do
   # config.host_authorization = { exclude: ->(request) { request.path == "/up" } }
   config.action_mailer.raise_delivery_errors = true
   config.action_mailer.delivery_method = :smtp
+
+  gmail_user_name = ENV['GMAIL_USER_NAME'] || Rails.application.credentials.dig(:gmail, :user_name)
+  gmail_password  = ENV['GMAIL_PASSWORD']  || Rails.application.credentials.dig(:gmail, :password)
+
   config.action_mailer.smtp_settings = {
-      address:              Rails.application.credentials.gmail[:address],
-      port:                 Rails.application.credentials.gmail[:port],
-      domain:               Rails.application.credentials.gmail[:domain],
-      user_name:            Rails.application.credentials.gmail[:user_name],
-      password:             Rails.application.credentials.gmail[:password],
-      authentication:       Rails.application.credentials.gmail[:auth],
-      enable_starttls_auto: Rails.application.credentials.gmail[:enable_tls]
+      address:              'smtp.gmail.com',
+      port:                 587,
+      domain:               'onegrab.in',
+      authentication:       'plain',
+      enable_starttls_auto: true,
+      user_name:            gmail_user_name,
+      password:             gmail_password
   }
+
   config.action_mailer.default_url_options = { host: 'onegrab.in', protocol: 'https' }
 end

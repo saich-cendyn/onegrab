@@ -1,5 +1,5 @@
 class JsonWebToken
-  SECRET_KEY = Rails.application.credentials.devise_jwt_secret_key!
+  SECRET_KEY = ENV['JWT_SECRET_KEY'] || Rails.application.credentials.jwt_secret_key!
   ALGORITHM = 'HS256'
 
   def self.encode(payload, exp = 24.hours.from_now.to_i)

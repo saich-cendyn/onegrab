@@ -56,7 +56,6 @@ end
 group :development do
   # Use console on exceptions pages [https://github.com/rails/web-console]
   gem "web-console"
-  gem "dotenv-rails"
   gem "letter_opener"
   gem 'pry', '~> 0.15.0'
 end
@@ -76,3 +75,4 @@ gem 'jwt'
 gem 'jsonapi-serializer'
 gem 'imagekitio'
 gem 'pagy'
+gem 'dotenv-rails'
