@@ -23,3 +23,8 @@
 <div class="mt-8">
   <%= link_to 'Add New Student', new_student_path, class: "inline-block bg-indigo-600 text-white px-6 py-3 rounded hover:bg-indigo-700 transition" %>
 </div>
+
+<div class="mt-8">
+  <%== pagy_nav(@pagy) %>
+</div>
+

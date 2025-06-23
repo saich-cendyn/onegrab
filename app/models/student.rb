@@ -18,11 +18,6 @@ class Student < ApplicationRecord
   enum :status, { active: 'active', inactive: 'inactive', graduated: 'graduated' }, suffix: true
   enum :progress_status, { not_started: 'not_started', in_progress: 'in_progress', completed: 'completed' }, suffix: true
 
-  # validates :image_url, format: {
-  #     with: URI::DEFAULT_PARSER.make_regexp(%w[http https]),
-  #     message: "must be a valid URL"
-  # }, allow_blank: true
-
   has_many :course_enrollments
   has_many :courses, through: :course_enrollments
 

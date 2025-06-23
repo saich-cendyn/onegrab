@@ -7,4 +7,31 @@
  * depending on specificity.
  *
  * Consider organizing styles into separate files for maintainability.
+ *= require pagy.tailwind
  */
+
+.pagy {
+    @apply flex space-x-2 font-semibold text-sm text-gray-600;
+}
+
+.pagy a {
+    @apply px-3 py-1 rounded bg-gray-200 text-gray-600 hover:bg-gray-300 hover:text-gray-900 transition;
+}
+
+.pagy a[aria-disabled="true"] {
+    @apply cursor-not-allowed bg-gray-100 text-gray-400 pointer-events-none select-none;
+}
+
+.pagy a.current,
+.pagy a[aria-current="page"] {
+    @apply bg-blue-600 text-white cursor-default;
+}
+
+.pagy label {
+    @apply inline-block bg-gray-200 rounded-lg px-3 py-1 whitespace-nowrap;
+}
+
+.pagy label input {
+    @apply bg-gray-100 border-none rounded-md;
+}
+

@@ -1,0 +1,12 @@
+<h1>Welcome to Onegrab, <%= @user.full_name %></h1>
+<p>
+  Please confirm your email address by clicking the link below:
+</p>
+
+<p>
+  <%= link_to 'Confirm my account', confirm_url(token: @user.confirmation_token) %>
+</p>
+
+<p>Thank you for joining us!</p>
+
+<p>If you did not sign up, please ignore this email.</p>

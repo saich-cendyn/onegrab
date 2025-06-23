@@ -1,6 +1,6 @@
 class EnquiriesController < ApplicationController
   def index
-    @enquiries = Enquiry.all
+    @pagy, @enquiries = pagy(Enquiry.order(created_at: :desc))
   end
 
   def show

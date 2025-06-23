@@ -1,5 +1,9 @@
-<p>Welcome <%= @email %>!</p>
+<h1>Confirm your OneGrab account</h1>
 
-<p>You can confirm your account email through the link below:</p>
+<p>Hello <%= @resource.email %>,</p>
 
-<p><%= link_to 'Confirm my account', confirmation_url(@resource, confirmation_token: @token) %></p>
+<p>To confirm your account, click the link below:</p>
+
+<p><a href="<%= @confirmation_url %>"><%= @confirmation_url %></a></p>
+
+<p>If you did not sign up, please ignore this email.</p>

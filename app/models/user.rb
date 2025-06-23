@@ -12,6 +12,8 @@ class User < ApplicationRecord
   has_many :authored_courses, class_name: 'Course', foreign_key: 'author_id'
   has_many :posts, foreign_key: :author_id
 
+  after_create :send_confirmation_email
+
   # Override Devise method to allow login via username or email
   def self.find_for_database_authentication(warden_conditions)
     conditions = warden_conditions.dup
@@ -27,5 +29,11 @@ class User < ApplicationRecord
 
   def full_name
     "#{first_name} #{last_name}"
+  end
+
+  private
+
+  def send_confirmation_email
+    ConfirmationJob.perform_later(id)
   end
 end

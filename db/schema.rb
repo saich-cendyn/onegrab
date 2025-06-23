@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[8.0].define(version: 2025_06_23_041034) do
+ActiveRecord::Schema[8.0].define(version: 2025_06_23_140754) do
   create_schema "auth"
   create_schema "extensions"
   create_schema "graphql"
@@ -123,6 +123,7 @@ ActiveRecord::Schema[8.0].define(version: 2025_06_23_041034) do
     t.string "parent_guardian_name"
     t.string "emergency_contact"
     t.string "progress_status"
+    t.bigint "user_id"
   end
 
   create_table "users", force: :cascade do |t|
