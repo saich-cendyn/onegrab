@@ -27,6 +27,7 @@ Rails.application.routes.draw do
   resources :students
   resources :posts
   resources :enquiries, only: [:index, :show]
+  get "/up", to: "health#up"
 
   root "home#index"
 end
