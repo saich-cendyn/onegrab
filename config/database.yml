@@ -7,10 +7,12 @@ default: &default
 
 development:
   <<: *default
+  url: <%= ENV['DEV_DATABASE_URL'] || 'postgres://localhost/onegrab_dev' %>
   database: onegrab_development
 
 test:
   <<: *default
+  url: <%= ENV['TEST_DATABASE_URL'] || 'postgres://localhost/onegrab_test' %>
   database: onegrab_test
 
 production:
