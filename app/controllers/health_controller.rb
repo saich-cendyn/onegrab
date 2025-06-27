@@ -1,4 +1,6 @@
 class HealthController < ApplicationController
+  skip_before_action :authenticate_member!
+
   def up
     respond_to do |format|
       format.html { render plain: "OK", status: :ok }
